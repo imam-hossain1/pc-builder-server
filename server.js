@@ -22,7 +22,11 @@ async function connectToDatabase() {
     await client.connect();
     db = client.db();
 
-
+    app.get('/components', async (req, res) => {
+      const query = {};
+      const result = await componentsCollection.find(query).toArray();
+      res.send(result);
+    });
 
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
