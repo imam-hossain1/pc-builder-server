@@ -34,6 +34,12 @@ async function connectToDatabase() {
       const result = await componentsCollection.find(query).toArray();
       res.send(result);
     });
+    app.get('/products/:category', async (req, res) => {
+      const category = req.params.category
+      const query = { category: { $regex: new RegExp('^' + category, 'i') } }
+      const result = await componentsCollection.find(query).toArray();
+      res.send(result);
+    });
 
   } catch (err) {
     console.error('Error connecting to MongoDB:', err);
