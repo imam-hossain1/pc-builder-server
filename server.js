@@ -17,6 +17,7 @@ let db;
 async function connectToDatabase() {
   const client = new MongoClient(process.env.MONGODB_URI);
   const componentsCollection = client.db("pc-builder").collection("products");
+  const categoriesCollection = client.db("pc-builder").collection("categories");
 
   try {
     await client.connect();
@@ -27,21 +28,29 @@ async function connectToDatabase() {
       const result = await componentsCollection.find(query).toArray();
       res.send(result);
     });
+    app.get('/categories', async (req, res) => {
+      const query = {};
+      const result = await categoriesCollection.find(query).toArray();
+      res.send(result);
+    });
     app.get('/components/:id', async (req, res) => {
       const id = req.params.id
-      console.log(id);
       const query = { _id: new ObjectId(id) }
       const result = await componentsCollection.find(query).toArray();
       res.send(result);
     });
+
     app.get('/products/:category', async (req, res) => {
-      const category = req.params.category
-      const query = { category: { $regex: new RegExp('^' + category, 'i') } }
+      const category = req.params.category;
+      const query = { category: { $regex: new RegExp('^' + category, 'i') } };
       const result = await componentsCollection.find(query).toArray();
       res.send(result);
     });
+  }
 
-  } catch (err) {
+    
+
+   catch (err) {
     console.error('Error connecting to MongoDB:', err);
   }
 }
@@ -50,4 +59,5 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   connectToDatabase();
 });
+
 
