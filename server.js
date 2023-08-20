@@ -57,7 +57,7 @@ async function connectToDatabase() {
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  connectToDatabase();
 });
+connectToDatabase();
 
 
