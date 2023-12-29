@@ -30,17 +30,19 @@ The API provides several endpoints:
 To set up this project locally, follow these steps:
 
 ### 1. Clone the Repository
-git clone https://github.com/your-username/pc-builder-backend.git cd pc-builder-backend
+git clone https://github.com/your-username/pc-builder-backend.git 
 
-### 2. Install Dependencies : 
+### 2.cd pc-builder-backend
+
+### 3. Install Dependencies : 
 npm install
-### 3. Environment Setup
+### 4. Environment Setup
 Create a `.env` file in the root directory with the following content:
 MONGODB_URI=your_mongodb_uri
 PORT=5000
 Replace `your_mongodb_uri` with your actual MongoDB URI.
 
-### 4. Start the Server : npm start
+### 5. Start the Server : npm start
 The server will start running on `http://localhost:5000/`.
 
 ## Author
